@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIEL et MELEC – Deux métiers connectés</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .search {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .search input {
+      padding: 0.5rem 1rem;
+      width: 300px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #004080;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card h2 i {
+      font-size: 1.3rem;
+    }
+    .card ul {
+      padding-left: 1.2rem;
+    }
+    .card ul li {
+      margin-bottom: 0.5rem;
+    }
+    .card.orange h2 { color: #e67e22; }
+    .card.green h2 { color: #27ae60; }
+    .card.purple h2 { color: #8e44ad; }
+    .card.turquoise h2 { color: #16a085; }
+    .card.gold h2 { color: #c49b0e; }
+  </style>
+  <script>
+    function filterCards() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? 'block' : 'none';
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>CIEL et MELEC – Deux métiers connectés</h1>
+  <div class="search">
+    <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="Rechercher un mot-clé (ex : domotique, cybersécurité...)">
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h2><i>💡</i> MELEC – Métiers de l'électricité</h2>
+      <ul>
+        <li>Électricité bâtiment / industrielle</li>
+        <li>Câblage d'installations (courants forts/faibles)</li>
+        <li>Lecture de plans électriques et schémas unifilaires</li>
+        <li>Réalisation d'armoires électriques et coffrets</li>
+        <li>Normes de sécurité électrique et prévention</li>
+        <li>Automatismes : GRAFCET, relais logiques (Zelio, Millenium, etc.)</li>
+        <li>Domotique : KNX, objets connectés, alarme, interphonie</li>
+        <li>Régulation de chauffage, ventilation et climatisation</li>
+        <li>Maintenance préventive et curative</li>
+        <li>Notions de réseaux (IP, adressage, switch basique)</li>
+      </ul>
+    </div>
+    <div class="card orange">
+      <h2><i>🛡️</i> CIEL – Cybersécurité, Informatique, Électronique</h2>
+      <ul>
+        <li>Architecture des réseaux informatiques (LAN, WAN, fibre)</li>
+        <li>Adressage IP, sous-réseaux, VLAN</li>
+        <li>Installation, configuration et sécurisation de postes informatiques</li>
+        <li>Cybersécurité : antivirus, pare-feu, mises à jour</li>
+        <li>Programmation Python, HTML/CSS, scripts réseau</li>
+        <li>Création et test de cartes électroniques (Arduino, capteurs, microcontrôleurs)</li>
+        <li>Maintenance de systèmes électroniques (soudure, composants, multimètre)</li>
+        <li>Virtualisation, installation de machines Linux / Windows</li>
+        <li>Utilisation de logiciels pro : Wireshark, Packet Tracer, etc.</li>
+        <li>Travail collaboratif en mode projet</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h2><i>🔗</i> Compétences et domaines communs</h2>
+      <ul>
+        <li>Domotique (volets roulants, alarme, éclairage connecté)</li>
+        <li>Programmation d’équipements connectés (ESP32, Raspberry Pi, etc.)</li>
+        <li>Maintenance de systèmes intelligents (smart building)</li>
+        <li>Objets connectés (IoT) : capteurs, actionneurs</li>
+        <li>Bornes de recharge électriques connectées</li>
+        <li>Armoire réseau + électrique combinée</li>
+        <li>Communication inter-systèmes (protocole TCP/IP, MQTT…)</li>
+      </ul>
+    </div>
+    <div class="card turquoise">
+      <h2><i>🛠️</i> Métiers croisés</h2>
+      <ul>
+        <li>Technicien smart building</li>
+        <li>Électricien domoticien</li>
+        <li>Installateur de réseaux connectés</li>
+        <li>Intégrateur de systèmes domotique / sécurité</li>
+        <li>Technicien IoT – Internet des Objets</li>
+        <li>Technicien fibre optique – courants faibles</li>
+        <li>Automaticien domotique</li>
+        <li>Technicien maintenance systèmes embarqués</li>
+      </ul>
+    </div>
+    <div class="card purple">
+      <h2><i>🎓</i> Poursuites d'études</h2>
+      <strong>Après MELEC :</strong>
+      <ul>
+        <li>BTS Électrotechnique</li>
+        <li>BTS Maintenance des systèmes (option A systèmes de production)</li>
+        <li>BTS Fluides – énergie – domotique (FED)</li>
+        <li>Mention complémentaire Technicien en réseaux électriques</li>
+      </ul>
+      <strong>Après CIEL :</strong>
+      <ul>
+        <li>BTS Systèmes numériques – Option Informatique et Réseaux</li>
+        <li>BTS Systèmes numériques – Option Électronique et Communication</li>
+        <li>BTS Électronique</li>
+        <li>BUT Réseaux et Télécommunications (sur dossier)</li>
+        <li>Classe préparatoire ATS ou école spécialisée</li>
+      </ul>
+      <strong>Communes possibles :</strong>
+      <ul>
+        <li>Licences professionnelles (énergie, cybersécurité, IoT, domotique)</li>
+        <li>Écoles d’ingénieurs en alternance (via concours ou passerelles)</li>
+        <li>Concours techniques (gendarmerie, douanes, SNCF, armée)</li>
+      </ul>
+    </div>
+    <div class="card gold">
+      <h2><i>💶</i> Salaires moyens par métier</h2>
+      <ul>
+        <li><strong>Électricien domotique :</strong> 1 800–2 100 € débutant / jusqu’à 3 000 € expérimenté</li>
+        <li><strong>Technicien réseaux :</strong> 1 900–2 200 € débutant / jusqu’à 3 200 € expérimenté</li>
+        <li><strong>Technicien cybersécurité :</strong> 2 000–2 400 € débutant / jusqu’à 4 000 € expérimenté</li>
+        <li><strong>Automaticien :</strong> 2 000–2 500 € débutant / jusqu’à 3 800 € expérimenté</li>
+        <li><strong>Technicien électronique :</strong> 1 800–2 300 € débutant / jusqu’à 3 200 € expérimenté</li>
+        <li><strong>Technicien smart building :</strong> 2 000–2 500 € débutant / jusqu’à 4 000 € expérimenté</li>
+        <li style="margin-top:1rem; font-style: italic;">
+          Les salaires évoluent avec l’expérience, les responsabilités, les certifications et la mobilité.
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
