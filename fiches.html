@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIEL et MELEC – Deux métiers connectés</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .search {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .search input {
+      padding: 0.5rem 1rem;
+      width: 300px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #004080;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card h2 i {
+      font-size: 1.3rem;
+    }
+    .card ul {
+      padding-left: 1.2rem;
+    }
+    .card ul li {
+      margin-bottom: 0.5rem;
+    }
+    .card.orange h2 { color: #e67e22; }
+    .card.green h2 { color: #27ae60; }
+    .card.purple h2 { color: #8e44ad; }
+    .card.turquoise h2 { color: #16a085; }
+    .card.gold h2 { color: #c49b0e; }
+  </style>
+  <script>
+    function filterCards() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? 'block' : 'none';
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>CIEL et MELEC – Deux métiers connectés</h1>
+  <div class="search">
+    <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="Rechercher un mot-clé (ex : domotique, cybersécurité...)">
+  </div>
+  <div class="grid">
+    <!-- Cartes métiers insérées ici dans la prochaine étape -->
+  </div>
+
+<div style="max-width:1000px;margin:3rem auto;">
+  <h2 style="text-align:center;">📂 Fiches métiers détaillées</h2>
+
+  <details><summary><strong>🔧 Technicien Réseaux Informatiques</strong></summary>
+  <p><strong>Description :</strong> Installe, configure et maintient les réseaux informatiques (serveurs, routeurs, câblage...).</p>
+  <p><strong>Qualités :</strong> Rigueur, sens de l'organisation, réactivité, analyse.</p>
+  <p><strong>Lieux de stage :</strong></p>
+  <ul><li>Secure Informatique – Liévin</li><li>DTI Informatique – Liévin</li><li>XEFI Lens – Liévin</li><li>ENOVA – Lille</li></ul>
+  <p><a href="https://www.onisep.fr/ressources/univers-metier/metiers/technicien-technicienne-telecoms-et-reseaux" target="_blank">Fiche Onisep</a></p>
+  </details>
+
+  <details><summary><strong>🛡️ Spécialiste en Cybersécurité</strong></summary>
+  <p><strong>Description :</strong> Protège les données, identifie les failles de sécurité, sécurise les infrastructures informatiques.</p>
+  <p><strong>Qualités :</strong> Curiosité, rigueur, sang-froid, esprit critique.</p>
+  <p><strong>Lieux de stage :</strong></p>
+  <ul><li>No More Crash – Vendin-le-Vieil</li><li>Nomios – Villeneuve-d’Ascq</li><li>SkillX – Métropole Lilloise</li></ul>
+  <p><a href="https://www.onisep.fr/ressources/univers-metier/metiers/expert-experte-en-securite-informatique" target="_blank">Fiche Onisep</a></p>
+  </details>
+
+  <details><summary><strong>🌐 Technicien IoT</strong></summary>
+  <p><strong>Description :</strong> Installe et programme des objets connectés pour transmettre des données dans divers contextes.</p>
+  <p><strong>Qualités :</strong> Polyvalence, électronique, programmation.</p>
+  <p><strong>Lieux de stage :</strong></p>
+  <ul><li>Kanope – Lille</li><li>CITC – IoT Cluster</li></ul>
+  <p><a href="https://www.onisep.fr/ressources/univers-metier/metiers/technicien-technicienne-en-domotique" target="_blank">Fiche Onisep</a></p>
+  </details>
+
+  <details><summary><strong>🏠 Technicien Smart Building</strong></summary>
+  <p><strong>Description :</strong> Gère les installations domotiques (éclairage, sécurité, capteurs, automatisme).</p>
+  <p><strong>Qualités :</strong> Curiosité, autonomie, électricité et informatique.</p>
+  <p><strong>Lieux de stage :</strong></p>
+  <ul><li>ROBBE Menuiserie & Domotique – Liévin</li><li>JB Domotique – Liévin</li><li>Gabeo Connect – Sainghin-en-Mélantois</li><li>FREDELEC – Lille</li></ul>
+  <p><a href="https://www.onisep.fr/ressources/univers-metier/metiers/technicien-technicienne-en-domotique" target="_blank">Fiche Onisep</a></p>
+  </details>
+
+  <details><summary><strong>⚡ Électricien du Bâtiment</strong></summary>
+  <p><strong>Description :</strong> Réalise les installations électriques dans les logements et bâtiments industriels.</p>
+  <p><strong>Qualités :</strong> Minutie, rigueur, respect des consignes.</p>
+  <p><strong>Lieux de stage :</strong></p>
+  <ul><li>SNEF</li><li>SPIE</li><li>Enedis</li></ul>
+  <p><a href="https://www.onisep.fr/ressources/univers-metier/metiers/electricien-electricienne-du-batiment" target="_blank">Fiche Onisep</a></p>
+  </details>
+
+  <details><summary><strong>🛠️ Technicien de Maintenance</strong></summary>
+  <p><strong>Description :</strong> Diagnostique les pannes, intervient sur les installations électriques, prévient les dysfonctionnements.</p>
+  <p><strong>Qualités :</strong> Réactivité, méthode, autonomie.</p>
+  <p><strong>Lieux de stage :</strong></p>
+  <ul><li>ArcelorMittal</li><li>EDF</li><li>Alstom</li></ul>
+  <p><a href="https://www.onisep.fr/ressources/univers-metier/metiers/technicien-technicienne-de-maintenance-industrielle" target="_blank">Fiche Onisep</a></p>
+  </details>
+
+  <details><summary><strong>🤖 Automaticien</strong></summary>
+  <p><strong>Description :</strong> Programme les systèmes automatiques dans les usines et chaînes de production.</p>
+  <p><strong>Qualités :</strong> Logique, rigueur, esprit de synthèse.</p>
+  <p><strong>Lieux de stage :</strong></p>
+  <ul><li>Actemium</li><li>Siemens</li><li>Bosch</li></ul>
+  <p><a href="https://www.onisep.fr/ressources/univers-metier/metiers/automaticien-automaticienne" target="_blank">Fiche Onisep</a></p>
+  </details>
+
+  <details><summary><strong>🏠 Domoticien</strong></summary>
+  <p><strong>Description :</strong> Configure les équipements connectés : volets roulants, éclairage intelligent, capteurs…</p>
+  <p><strong>Qualités :</strong> Sens du détail, double compétence en électricité/informatique.</p>
+  <p><strong>Lieux de stage :</strong></p>
+  <ul><li>Delta Dore</li><li>Legrand</li><li>Somfy</li></ul>
+  <p><a href="https://www.onisep.fr/ressources/univers-metier/metiers/domoticien-domoticienne" target="_blank">Fiche Onisep</a></p>
+  </details>
+</div>
+
+</body>
+</html>
