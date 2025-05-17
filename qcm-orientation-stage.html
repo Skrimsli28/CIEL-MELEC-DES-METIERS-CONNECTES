@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QCM Orientation Stage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    form {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin: 0.4rem 0;
+    }
+    button {
+      display: block;
+      margin: 2rem auto;
+      padding: 0.8rem 2rem;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #resultat {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #dff0d8;
+      padding: 1.5rem;
+      border-radius: 10px;
+      color: #2d602d;
+      font-weight: bold;
+      display: none;
+    }
+
+}
+  </style>
+</head>
+<body>
+  <h1>QCM d’Orientation : Quel métier est fait pour toi ?</h1>
+  <form id="qcmForm"></form>
+  <div id="resultat"></div>
+  <script>
+    const metiers = {
+      reseau: "Technicien Réseaux Informatiques",
+      cyber: "Spécialiste en Cybersécurité",
+      elec: "Électricien du Bâtiment",
+      domo: "Domoticien / Smart Building",
+      maint: "Technicien de Maintenance",
+      iot: "Technicien IoT",
+      auto: "Automaticien",
+      electro: "Technicien Électronique"
+    };
+
+    const questions = [
+      {
+        q: "1. Tu préfères travailler :",
+        options: [
+          { t: "Avec des câbles, outils, matériels électriques", m: ["elec", "maint"] },
+          { t: "Sur ordinateur, configurer ou diagnostiquer", m: ["reseau", "cyber"] },
+          { t: "Sur des systèmes automatisés et connectés", m: ["domo", "iot", "auto"] }
+        ]
+      },
+      {
+        q: "2. Face à un problème, tu as tendance à :",
+        options: [
+          { t: "Chercher l’origine de la panne pour réparer", m: ["maint", "auto"] },
+          { t: "Vérifier la configuration réseau ou système", m: ["reseau", "cyber"] },
+          { t: "Remplacer ou sécuriser les équipements", m: ["elec", "maint"] }
+        ]
+      },
+     {
+  q: "3. Travailler en équipe, c’est pour toi :",
+  options: [
+    { t: "Essentiel, surtout sur les chantiers", m: ["elec", "domo", "maint"] },
+    { t: "Utile, mais tu préfères l’autonomie", m: ["cyber", "reseau", "iot"] },
+    { t: "Indifférent, tant que les objectifs sont clairs", m: ["auto", "electro"] }
+  ]
+},
+{
+  q: "4. Tu es le plus à l’aise avec :",
+  options: [
+    { t: "Des outils, du matériel électrique ou mécanique", m: ["elec", "maint"] },
+    { t: "Un clavier, un routeur, un logiciel", m: ["reseau", "cyber"] },
+    { t: "Un circuit imprimé ou une carte programmable", m: ["electro", "iot"] }
+  ]
+},
+{
+  q: "5. Tu es plutôt du genre à :",
+  options: [
+    { t: "Suivre une méthode étape par étape", m: ["auto", "maint"] },
+    { t: "Expérimenter par toi-même", m: ["iot", "electro"] },
+    { t: "Appliquer des règles de sécurité en priorité", m: ["cyber", "elec"] }
+  ]
+},
+{
+  q: "6. Ton environnement de travail idéal :",
+  options: [
+    { t: "Un atelier ou une salle technique", m: ["electro", "auto", "maint"] },
+    { t: "Un chantier ou un bâtiment", m: ["elec", "domo"] },
+    { t: "Un bureau ou un local serveur", m: ["reseau", "cyber"] }
+  ]
+},
+{
+  q: "7. Tu préfères que ton travail ait un impact sur :",
+  options: [
+    { t: "Le confort d’un bâtiment (lumière, volets, capteurs)", m: ["domo", "elec"] },
+    { t: "La sécurité des données", m: ["cyber"] },
+    { t: "Le bon fonctionnement d’une usine ou machine", m: ["auto", "maint"] }
+  ]
+},
+{
+  q: "8. Quand tu travailles, tu aimes :",
+  options: [
+    { t: "Voir un résultat concret et immédiat", m: ["elec", "domo"] },
+    { t: "Résoudre des bugs ou anomalies logiques", m: ["reseau", "cyber"] },
+    { t: "Tester et ajuster des systèmes", m: ["maint", "auto"] }
+  ]
+},
+{
+  q: "9. Tu veux apprendre à :",
+  options: [
+    { t: "Câbler et sécuriser un tableau électrique", m: ["elec", "domo"] },
+    { t: "Configurer un serveur ou un pare-feu", m: ["cyber", "reseau"] },
+    { t: "Programmer une carte ou un microcontrôleur", m: ["iot", "electro"] }
+  ]
+},
+{
+  q: "10. Tu te vois travailler :",
+  options: [
+    { t: "Dans une entreprise industrielle", m: ["maint", "auto", "electro"] },
+    { t: "Dans une PME d’installation ou de service", m: ["elec", "domo"] },
+    { t: "Dans une structure informatique ou cybersécurité", m: ["cyber", "reseau"] }
+  ]
+},
+{
+  q: "11. Tu apprécies particulièrement :",
+  options: [
+    { t: "Lire et interpréter un schéma technique", m: ["elec", "auto", "electro"] },
+    { t: "Configurer des systèmes informatiques", m: ["reseau", "cyber"] },
+    { t: "Installer des capteurs et objets connectés", m: ["iot", "domo"] }
+  ]
+},
+{
+  q: "12. Lors d’un projet, tu préfères :",
+  options: [
+    { t: "Mettre en œuvre l'installation physique", m: ["elec", "domo", "maint"] },
+    { t: "Tester et corriger le système avant mise en service", m: ["auto", "electro", "iot"] },
+    { t: "Superviser et documenter les étapes", m: ["reseau", "cyber"] }
+  ]
+},
+{
+  q: "13. Tu aimerais développer :",
+  options: [
+    { t: "Ta précision manuelle et ton habilité technique", m: ["elec", "electro", "domo"] },
+    { t: "Ta logique et ta compréhension des réseaux", m: ["reseau", "auto"] },
+    { t: "Ton sens de l’analyse et de la prévention", m: ["cyber", "maint"] }
+  ]
+},
+{
+  q: "14. Lequel te ressemble le plus ?",
+  options: [
+    { t: "Observateur, rigoureux, appliqué", m: ["auto", "maint", "cyber"] },
+    { t: "Curieux, bidouilleur, touche-à-tout", m: ["iot", "electro"] },
+    { t: "Dynamique, sociable, orienté terrain", m: ["elec", "domo"] }
+  ]
+},
+{
+  q: "15. Quand tu parles de ton futur métier, tu veux :",
+  options: [
+    { t: "Participer à l’évolution des bâtiments intelligents", m: ["domo", "iot"] },
+    { t: "Garantir la sécurité des infrastructures", m: ["cyber", "reseau"] },
+    { t: "Assurer le bon fonctionnement de systèmes critiques", m: ["maint", "auto"] }
+  ]
+},
+{
+  q: "16. Tu préfères manipuler :",
+  options: [
+    { t: "Des logiciels, des scripts ou des configurations réseau", m: ["reseau", "cyber"] },
+    { t: "Des équipements physiques (tournevis, multimètre, testeurs…)", m: ["elec", "maint"] },
+    { t: "Des cartes Arduino, capteurs, circuits", m: ["iot", "electro"] }
+  ]
+},
+{
+  q: "17. Tu es intéressé par :",
+  options: [
+    { t: "La domotique et les équipements connectés", m: ["domo", "iot"] },
+    { t: "L’électronique et les microcontrôleurs", m: ["electro", "auto"] },
+    { t: "Les interventions techniques et la maintenance", m: ["maint", "elec"] }
+  ]
+},
+{
+  q: "18. Ton enseignant remarque que tu es :",
+  options: [
+    { t: "Minutieux et logique dans ton raisonnement", m: ["auto", "cyber"] },
+    { t: "Autonome et débrouillard avec le matériel", m: ["maint", "elec"] },
+    { t: "Créatif et curieux d’essayer de nouvelles choses", m: ["iot", "electro"] }
+  ]
+},
+{
+  q: "19. En entreprise, tu préférerais :",
+  options: [
+    { t: "Intervenir seul sur des systèmes à sécuriser ou configurer", m: ["cyber", "reseau"] },
+    { t: "Travailler avec d’autres sur chantier ou atelier", m: ["elec", "domo", "maint"] },
+    { t: "Proposer des idées pour améliorer ou automatiser un système", m: ["iot", "auto", "electro"] }
+  ]
+},
+{
+  q: "20. Dans un monde idéal, tu aimerais :",
+  options: [
+    { t: "Créer ou intégrer des objets intelligents", m: ["iot", "domo"] },
+    { t: "Résoudre des pannes complexes", m: ["maint", "auto"] },
+    { t: "Protéger les systèmes contre les intrusions", m: ["cyber", "reseau"] }
+  ]
+}
+
+    ];
+
+    const form = document.getElementById("qcmForm");
+    questions.forEach((q, i) => {
+      const block = document.createElement("div");
+      block.className = "question";
+      const title = document.createElement("h2");
+      title.textContent = q.q;
+      block.appendChild(title);
+      q.options.forEach((opt, j) => {
+        const label = document.createElement("label");
+        label.innerHTML = `<input type="radio" name="q${i}" value="${opt.m.join(',')}"> ${opt.t}`;
+        block.appendChild(label);
+      });
+      form.appendChild(block);
+    });
+
+    const submit = document.createElement("button");
+    submit.type = "submit";
+    submit.textContent = "Voir mes résultats";
+    form.appendChild(submit);
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const scores = {};
+      for (let key in metiers) scores[key] = 0;
+      questions.forEach((_, i) => {
+        const answer = document.querySelector(`input[name='q${i}']:checked`);
+        if (answer) {
+          answer.value.split(',').forEach(m => scores[m]++);
+        }
+      });
+
+      const total = Object.values(scores).reduce((a, b) => a + b, 0);
+      const resultats = Object.entries(scores)
+        .map(([key, val]) => ({ metier: metiers[key], score: Math.round((val / total) * 100) }))
+        .filter(r => r.score > 0)
+        .sort((a, b) => b.score - a.score);
+
+      const output = resultats.map(r => `${r.metier} : ${r.score} %`).join("<br>");
+      const div = document.getElementById("resultat");
+      div.innerHTML = `<h2>🔎 Résultats</h2><p>${output}</p>
+  <div style='margin-top:1.5rem; text-align:center;'>
+    <button onclick='location.reload()' style='margin:0.5rem;padding:0.5rem 1rem;background:#ccc;border:none;border-radius:4px;'>
+      🔁 Recommencer le test
+    </button>
+    <a href='fiches.html' style='margin:0.5rem;padding:0.5rem 1rem;background:#004080;color:white;border:none;border-radius:4px;text-decoration:none;'>
+      📂 Voir les fiches métiers
+    </a>
+  </div>`;
+div.style.display = "block";
+form.style.display = "none"; // 👈 ajoute cette ligne
+
+
+    });
+  </script>
+</body>
+</html>
