@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Automatisé</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <style>
+   body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f1f2f6, #dbe4f3);
+  padding: 2rem;
+  color: #343a40;
+}
+
+.formulaire {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.formulaire label {
+  font-weight: bold;
+  display: block;
+  margin-top: 1rem;
+}
+
+.formulaire input, .formulaire select {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+}
+
+.cv-container {
+  max-width: 800px;
+  margin: auto;
+  background: #ffffff;
+  display: flex;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.cv-left {
+  background: #004080;
+  color: white;
+  width: 30%;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.cv-left img {
+  display: none;
+}
+
+.cv-right {
+  width: 70%;
+  padding: 2rem;
+  background: #ffffff;
+}
+
+.editable {
+  border: 1px dashed #c0c0c0;
+  border-radius: 4px;
+  padding: 0.4rem;
+  margin-bottom: 0.4rem;
+  transition: background 0.2s ease;
+}
+.editable:focus {
+  background: #f1f9ff;
+  outline: none;
+}
+
+h1 {
+  color: #2c3e50;
+  border-bottom: 2px solid #004080;
+  padding-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+h2 {
+  color: #004080;
+  margin-top: 1.5rem;
+  border-left: 4px solid #004080;
+  padding-left: 0.5rem;
+  font-size: 1.2rem;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+p {
+  line-height: 1.6;
+}
+
+.download {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+button {
+  padding: 0.8rem 2rem;
+  background: #004080;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #002d5f;
+}
+
+.add-btn {
+  font-size: 0.9rem;
+  background: #198754;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="formulaire">
+    <label for="selectMetier">Choisis ton métier :</label>
+    <select id="selectMetier" onchange="updateCV()">
+      <option>Technicien Réseaux</option>
+      <option>Domoticien</option>
+      <option>Technicien Cybersécurité</option>
+      <option>Électricien du Bâtiment</option>
+      <option>Automaticien</option>
+      <option>Technicien Électronique</option>
+    </select>
+  </div>
+
+  <div class="cv-container" id="cvContent">
+    <div class="cv-left">
+      <img src="logo-lycee.png" alt="Logo Lycée">
+      <p contenteditable="true" class="editable">Nom Prénom</p>
+      <p contenteditable="true" class="editable">Téléphone</p>
+      <p contenteditable="true" class="editable">Email</p>
+      <p contenteditable="true" class="editable">Adresse</p>
+    </div>
+    <div class="cv-right">
+      <h1 contenteditable="true" class="editable" id="titre">CV - [Métier]</h1>
+      <p id="nomEntreprise" contenteditable="true" class="editable" style="font-style: italic; margin-top: -1rem;">Entreprise : _______________________</p>
+      <h2>Profil</h2>
+      <p id="profil" contenteditable="true" class="editable"></p>
+      <h2>Compétences Clés</h2>
+      <ul id="competences"></ul>
+      <button class="add-btn" id="btnAddComp" onclick="addCompetence()">+ Ajouter une compétence</button>
+      <h2>Formation</h2>
+      <p contenteditable="true" class="editable">Bac Pro CIEL ou MELEC selon spécialité</p>
+      <h2>Stages / Expériences</h2>
+      <ul id="stages"></ul>
+      <button class="add-btn" id="btnAddStage" onclick="addStage()">+ Ajouter une expérience</button>
+      <h2>Loisirs</h2>
+      <ul id="loisirs">
+        <li contenteditable="true" class="editable">Exemple : Lecture, sport, informatique</li>
+      </ul>
+      <button class="add-btn" id="btnAddLoisir" onclick="addLoisir()">+ Ajouter un loisir</button>
+    </div>
+  </div>
+
+  <div class="download">
+    <button onclick="generatePDF()">🗃️ Télécharger le CV en PDF</button>
+  </div>
+
+  <script>
+    const baseCV = {
+      "Technicien Réseaux": {
+        profil: "Passionné par les infrastructures réseaux, la configuration et la cybersécurité.",
+        competences: [
+          "Adressage IP, VLAN, réseaux LAN/WAN",
+          "Configuration de routeurs et switchs",
+          "Diagnostic et résolution de pannes",
+          "Utilisation de Packet Tracer et Wireshark"
+        ]
+      },
+      "Domoticien": {
+        profil: "Spécialiste des systèmes connectés pour le confort et la sécurité du bâtiment.",
+        competences: [
+          "Installation d’alarmes, volets, thermostats connectés",
+          "Programmation de systèmes KNX, Arduino",
+          "Lecture de plans et schémas électriques",
+          "Maintenance et mise en service domotique"
+        ]
+      },
+      "Technicien Cybersécurité": {
+        profil: "Motivé par la sécurité informatique et la protection des données.",
+        competences: [
+          "Pare-feu, antivirus, mises à jour",
+          "Configuration de systèmes sécurisés",
+          "Notions d’éthique et RGPD",
+          "Surveillance des intrusions"
+        ]
+      },
+      "Électricien du Bâtiment": {
+        profil: "À l’aise avec les installations électriques dans le bâtiment.",
+        competences: [
+          "Câblage courant fort/faible",
+          "Lecture de plans électriques",
+          "Installation d'équipements domotiques",
+          "Normes de sécurité électrique"
+        ]
+      },
+      "Automaticien": {
+        profil: "Attiré par les systèmes industriels automatisés.",
+        competences: [
+          "GRAFCET, automates, relais logiques",
+          "Coffrets de commande",
+          "Maintenance de systèmes automatisés",
+          "Programmation de cycles automatisés"
+        ]
+      },
+      "Technicien Électronique": {
+        profil: "Curieux et précis dans l’assemblage de circuits électroniques.",
+        competences: [
+          "Lecture de schémas électroniques",
+          "Utilisation d'Arduino, multimètre",
+          "Soudure et test de composants",
+          "Maintenance de systèmes embarqués"
+        ]
+      }
+    };
+
+    function updateCV() {
+      const metier = document.getElementById("selectMetier").value;
+      const data = baseCV[metier] || baseCV["Technicien Réseaux"];
+
+      document.getElementById("titre").textContent = `CV - ${metier}`;
+      document.getElementById("profil").textContent = data.profil;
+
+      const compList = document.getElementById("competences");
+      compList.innerHTML = "";
+      data.competences.forEach(c => {
+        const li = document.createElement("li");
+        li.contentEditable = true;
+        li.className = "editable";
+        li.textContent = c;
+        compList.appendChild(li);
+      });
+
+      const entrepriseTxt = document.getElementById("nomEntreprise").textContent.replace("Entreprise :", "").trim();
+
+      const stageList = document.getElementById("stages");
+      stageList.innerHTML = "";
+      [
+        `Stage de 6 semaines chez ${entrepriseTxt || "____________"}`,
+        `Projet réalisé en classe sur le thème : ${metier}`
+      ].forEach(s => {
+        const li = document.createElement("li");
+        li.contentEditable = true;
+        li.className = "editable";
+        li.textContent = s;
+        stageList.appendChild(li);
+      });
+    }
+
+    function addCompetence() {
+      const li = document.createElement("li");
+      li.contentEditable = true;
+      li.className = "editable";
+      li.textContent = "Nouvelle compétence";
+      document.getElementById("competences").appendChild(li);
+    }
+
+    function addStage() {
+      const li = document.createElement("li");
+      li.contentEditable = true;
+      li.className = "editable";
+      li.textContent = "Nouvelle expérience";
+      document.getElementById("stages").appendChild(li);
+    }
+
+    function addLoisir() {
+      const li = document.createElement("li");
+      li.contentEditable = true;
+      li.className = "editable";
+      li.textContent = "Nouveau loisir";
+      document.getElementById("loisirs").appendChild(li);
+    }
+
+    function generatePDF() {
+      document.getElementById("btnAddComp").style.display = "none";
+      document.getElementById("btnAddStage").style.display = "none";
+      document.getElementById("btnAddLoisir").style.display = "none";
+
+      const element = document.getElementById("cvContent");
+      const opt = {
+        margin: 0.5,
+        filename: 'CV_Personnalise.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        document.getElementById("btnAddComp").style.display = "inline-block";
+        document.getElementById("btnAddStage").style.display = "inline-block";
+        document.getElementById("btnAddLoisir").style.display = "inline-block";
+      });
+    }
+
+    window.onload = updateCV;
+  </script>
+</body>
+</html>
