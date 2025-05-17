@@ -62,6 +62,35 @@
     .card.purple h2 { color: #8e44ad; }
     .card.turquoise h2 { color: #16a085; }
     .card.gold h2 { color: #c49b0e; }
+    .btn-fiches {
+  display: inline-block;
+  background: #004080;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  font-size: 1rem;
+  max-width: 100%;
+  text-align: center;
+  word-break: break-word;
+}
+
+@media screen and (max-width: 600px) {
+  .btn-fiches {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+  }
+}
+    @media screen and (max-width: 600px) {
+  body {
+    padding: 1rem 0.5rem;
+  }
+}
   </style>
   <script>
     function filterCards() {
@@ -78,9 +107,9 @@
   <h1>CIEL et MELEC – Deux métiers connectés</h1>
   <div class="search">
     <div style="margin-bottom: 1rem;">
-    <a href="fiches.html" style="background:#004080;color:white;padding:0.8rem 1.5rem;text-decoration:none;border-radius:6px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.2);">
-      🔍 Voir les fiches métiers et lieux de stage
-    </a>
+    <a href="fiches.html" class="btn-fiches">
+  🔍 Voir les fiches métiers et lieux de stage
+</a>
   </div>
     <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="Rechercher un mot-clé (ex : domotique, cybersécurité...)">
   </div>
