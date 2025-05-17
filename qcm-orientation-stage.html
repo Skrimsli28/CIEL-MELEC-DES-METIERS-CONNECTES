@@ -3,323 +3,328 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV Automatisé</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <title>QCM Orientation Stage</title>
   <style>
-   body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #f1f2f6, #dbe4f3);
-  padding: 2rem;
-  color: #343a40;
-}
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    form {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin: 0.4rem 0;
+    }
+    button {
+      display: block;
+      margin: 2rem auto;
+      padding: 0.8rem 2rem;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #resultat {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #dff0d8;
+      padding: 1.5rem;
+      border-radius: 10px;
+      color: #2d602d;
+      font-weight: bold;
+      display: none;
+    }
+	@media screen and (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
 
-.formulaire {
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  margin-bottom: 2rem;
-  background: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
+  h1, h2 {
+    font-size: 1.2rem;
+  }
 
-.formulaire label {
-  font-weight: bold;
-  display: block;
-  margin-top: 1rem;
-}
+  .question {
+    margin-bottom: 1rem;
+  }
 
-.formulaire input, .formulaire select {
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  width: 90%;
-  max-width: 400px;
-  border-radius: 6px;
-  border: 1px solid #ced4da;
-}
+  label {
+    font-size: 0.95rem;
+  }
 
-.cv-container {
-  max-width: 800px;
-  margin: auto;
-  background: #ffffff;
-  display: flex;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  overflow: hidden;
-}
+  form {
+    padding: 1rem;
+  }
 
-.cv-left {
-  background: #004080;
-  color: white;
-  width: 30%;
-  padding: 1.5rem;
-  text-align: center;
-}
+  button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
 
-.cv-left img {
-  display: none;
-}
+  .btn-fiches {
+    display: block;
+    width: 90%;
+    margin: 1rem auto;
+    text-align: center;
+  }
 
-.cv-right {
-  width: 70%;
-  padding: 2rem;
-  background: #ffffff;
+  #resultat {
+    font-size: 1rem;
+    padding: 1rem;
+  }
 }
-
-.editable {
-  border: 1px dashed #c0c0c0;
-  border-radius: 4px;
-  padding: 0.4rem;
-  margin-bottom: 0.4rem;
-  transition: background 0.2s ease;
-}
-.editable:focus {
-  background: #f1f9ff;
-  outline: none;
-}
-
-h1 {
-  color: #2c3e50;
-  border-bottom: 2px solid #004080;
-  padding-bottom: 0.5rem;
-  font-size: 1.8rem;
-}
-
-h2 {
-  color: #004080;
-  margin-top: 1.5rem;
-  border-left: 4px solid #004080;
-  padding-left: 0.5rem;
-  font-size: 1.2rem;
-}
-
-ul {
-  padding-left: 1.5rem;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-p {
-  line-height: 1.6;
-}
-
-.download {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-button {
-  padding: 0.8rem 2rem;
-  background: #004080;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #002d5f;
-}
-
-.add-btn {
-  font-size: 0.9rem;
-  background: #198754;
-  margin-top: 0.5rem;
-  border-radius: 4px;
-}
-
   </style>
 </head>
 <body>
-  <div class="formulaire">
-    <label for="selectMetier">Choisis ton métier :</label>
-    <select id="selectMetier" onchange="updateCV()">
-      <option>Technicien Réseaux</option>
-      <option>Domoticien</option>
-      <option>Technicien Cybersécurité</option>
-      <option>Électricien du Bâtiment</option>
-      <option>Automaticien</option>
-      <option>Technicien Électronique</option>
-    </select>
+  
   </div>
-
-  <div class="cv-container" id="cvContent">
-    <div class="cv-left">
-      <img src="logo-lycee.png" alt="Logo Lycée">
-      <p contenteditable="true" class="editable">Nom Prénom</p>
-      <p contenteditable="true" class="editable">Téléphone</p>
-      <p contenteditable="true" class="editable">Email</p>
-      <p contenteditable="true" class="editable">Adresse</p>
-    </div>
-    <div class="cv-right">
-      <h1 contenteditable="true" class="editable" id="titre">CV - [Métier]</h1>
-      <p id="nomEntreprise" contenteditable="true" class="editable" style="font-style: italic; margin-top: -1rem;">Entreprise : _______________________</p>
-      <h2>Profil</h2>
-      <p id="profil" contenteditable="true" class="editable"></p>
-      <h2>Compétences Clés</h2>
-      <ul id="competences"></ul>
-      <button class="add-btn" id="btnAddComp" onclick="addCompetence()">+ Ajouter une compétence</button>
-      <h2>Formation</h2>
-      <p contenteditable="true" class="editable">Bac Pro CIEL ou MELEC selon spécialité</p>
-      <h2>Stages / Expériences</h2>
-      <ul id="stages"></ul>
-      <button class="add-btn" id="btnAddStage" onclick="addStage()">+ Ajouter une expérience</button>
-      <h2>Loisirs</h2>
-      <ul id="loisirs">
-        <li contenteditable="true" class="editable">Exemple : Lecture, sport, informatique</li>
-      </ul>
-      <button class="add-btn" id="btnAddLoisir" onclick="addLoisir()">+ Ajouter un loisir</button>
-    </div>
+  <div style="text-align: center; margin-bottom: 2rem;">
+    <a href="#qcmForm" style="background:#004080;color:white;padding:0.8rem 1.5rem;text-decoration:none;border-radius:6px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.2);font-size:1rem;">
+      🧭 Commencer le questionnaire d'orientation
+    </a>
   </div>
-
-  <div class="download">
-    <button onclick="generatePDF()">🗃️ Télécharger le CV en PDF</button>
-  </div>
-
+  <h1>QCM d’Orientation : Quel métier est fait pour toi ?</h1>
+  <form id="qcmForm"></form>
+  <div id="resultat"></div>
   <script>
-    const baseCV = {
-      "Technicien Réseaux": {
-        profil: "Passionné par les infrastructures réseaux, la configuration et la cybersécurité.",
-        competences: [
-          "Adressage IP, VLAN, réseaux LAN/WAN",
-          "Configuration de routeurs et switchs",
-          "Diagnostic et résolution de pannes",
-          "Utilisation de Packet Tracer et Wireshark"
-        ]
-      },
-      "Domoticien": {
-        profil: "Spécialiste des systèmes connectés pour le confort et la sécurité du bâtiment.",
-        competences: [
-          "Installation d’alarmes, volets, thermostats connectés",
-          "Programmation de systèmes KNX, Arduino",
-          "Lecture de plans et schémas électriques",
-          "Maintenance et mise en service domotique"
-        ]
-      },
-      "Technicien Cybersécurité": {
-        profil: "Motivé par la sécurité informatique et la protection des données.",
-        competences: [
-          "Pare-feu, antivirus, mises à jour",
-          "Configuration de systèmes sécurisés",
-          "Notions d’éthique et RGPD",
-          "Surveillance des intrusions"
-        ]
-      },
-      "Électricien du Bâtiment": {
-        profil: "À l’aise avec les installations électriques dans le bâtiment.",
-        competences: [
-          "Câblage courant fort/faible",
-          "Lecture de plans électriques",
-          "Installation d'équipements domotiques",
-          "Normes de sécurité électrique"
-        ]
-      },
-      "Automaticien": {
-        profil: "Attiré par les systèmes industriels automatisés.",
-        competences: [
-          "GRAFCET, automates, relais logiques",
-          "Coffrets de commande",
-          "Maintenance de systèmes automatisés",
-          "Programmation de cycles automatisés"
-        ]
-      },
-      "Technicien Électronique": {
-        profil: "Curieux et précis dans l’assemblage de circuits électroniques.",
-        competences: [
-          "Lecture de schémas électroniques",
-          "Utilisation d'Arduino, multimètre",
-          "Soudure et test de composants",
-          "Maintenance de systèmes embarqués"
-        ]
-      }
+    const metiers = {
+      reseau: "Technicien Réseaux Informatiques",
+      cyber: "Spécialiste en Cybersécurité",
+      elec: "Électricien du Bâtiment",
+      domo: "Domoticien / Smart Building",
+      maint: "Technicien de Maintenance",
+      iot: "Technicien IoT",
+      auto: "Automaticien",
+      electro: "Technicien Électronique"
     };
 
-    function updateCV() {
-      const metier = document.getElementById("selectMetier").value;
-      const data = baseCV[metier] || baseCV["Technicien Réseaux"];
+    const questions = [
+      {
+        q: "1. Tu préfères travailler :",
+        options: [
+          { t: "Avec des câbles, outils, matériels électriques", m: ["elec", "maint"] },
+          { t: "Sur ordinateur, configurer ou diagnostiquer", m: ["reseau", "cyber"] },
+          { t: "Sur des systèmes automatisés et connectés", m: ["domo", "iot", "auto"] }
+        ]
+      },
+      {
+        q: "2. Face à un problème, tu as tendance à :",
+        options: [
+          { t: "Chercher l’origine de la panne pour réparer", m: ["maint", "auto"] },
+          { t: "Vérifier la configuration réseau ou système", m: ["reseau", "cyber"] },
+          { t: "Remplacer ou sécuriser les équipements", m: ["elec", "maint"] }
+        ]
+      },
+      // Questions 3 à 20
+{
+  q: "3. Travailler en équipe, c’est pour toi :",
+  options: [
+    { t: "Essentiel, surtout sur les chantiers", m: ["elec", "domo", "maint"] },
+    { t: "Utile, mais tu préfères l’autonomie", m: ["cyber", "reseau", "iot"] },
+    { t: "Indifférent, tant que les objectifs sont clairs", m: ["auto", "electro"] }
+  ]
+},
+{
+  q: "4. Tu es le plus à l’aise avec :",
+  options: [
+    { t: "Des outils, du matériel électrique ou mécanique", m: ["elec", "maint"] },
+    { t: "Un clavier, un routeur, un logiciel", m: ["reseau", "cyber"] },
+    { t: "Un circuit imprimé ou une carte programmable", m: ["electro", "iot"] }
+  ]
+},
+{
+  q: "5. Tu es plutôt du genre à :",
+  options: [
+    { t: "Suivre une méthode étape par étape", m: ["auto", "maint"] },
+    { t: "Expérimenter par toi-même", m: ["iot", "electro"] },
+    { t: "Appliquer des règles de sécurité en priorité", m: ["cyber", "elec"] }
+  ]
+},
+{
+  q: "6. Ton environnement de travail idéal :",
+  options: [
+    { t: "Un atelier ou une salle technique", m: ["electro", "auto", "maint"] },
+    { t: "Un chantier ou un bâtiment", m: ["elec", "domo"] },
+    { t: "Un bureau ou un local serveur", m: ["reseau", "cyber"] }
+  ]
+},
+{
+  q: "7. Tu préfères que ton travail ait un impact sur :",
+  options: [
+    { t: "Le confort d’un bâtiment (lumière, volets, capteurs)", m: ["domo", "elec"] },
+    { t: "La sécurité des données", m: ["cyber"] },
+    { t: "Le bon fonctionnement d’une usine ou machine", m: ["auto", "maint"] }
+  ]
+},
+{
+  q: "8. Quand tu travailles, tu aimes :",
+  options: [
+    { t: "Voir un résultat concret et immédiat", m: ["elec", "domo"] },
+    { t: "Résoudre des bugs ou anomalies logiques", m: ["reseau", "cyber"] },
+    { t: "Tester et ajuster des systèmes", m: ["maint", "auto"] }
+  ]
+},
+{
+  q: "9. Tu veux apprendre à :",
+  options: [
+    { t: "Câbler et sécuriser un tableau électrique", m: ["elec", "domo"] },
+    { t: "Configurer un serveur ou un pare-feu", m: ["cyber", "reseau"] },
+    { t: "Programmer une carte ou un microcontrôleur", m: ["iot", "electro"] }
+  ]
+},
+{
+  q: "10. Tu te vois travailler :",
+  options: [
+    { t: "Dans une entreprise industrielle", m: ["maint", "auto", "electro"] },
+    { t: "Dans une PME d’installation ou de service", m: ["elec", "domo"] },
+    { t: "Dans une structure informatique ou cybersécurité", m: ["cyber", "reseau"] }
+  ]
+},
+{
+  q: "11. Tu apprécies particulièrement :",
+  options: [
+    { t: "Lire et interpréter un schéma technique", m: ["elec", "auto", "electro"] },
+    { t: "Configurer des systèmes informatiques", m: ["reseau", "cyber"] },
+    { t: "Installer des capteurs et objets connectés", m: ["iot", "domo"] }
+  ]
+},
+{
+  q: "12. Lors d’un projet, tu préfères :",
+  options: [
+    { t: "Mettre en œuvre l'installation physique", m: ["elec", "domo", "maint"] },
+    { t: "Tester et corriger le système avant mise en service", m: ["auto", "electro", "iot"] },
+    { t: "Superviser et documenter les étapes", m: ["reseau", "cyber"] }
+  ]
+},
+{
+  q: "13. Tu aimerais développer :",
+  options: [
+    { t: "Ta précision manuelle et ton habilité technique", m: ["elec", "electro", "domo"] },
+    { t: "Ta logique et ta compréhension des réseaux", m: ["reseau", "auto"] },
+    { t: "Ton sens de l’analyse et de la prévention", m: ["cyber", "maint"] }
+  ]
+},
+{
+  q: "14. Lequel te ressemble le plus ?",
+  options: [
+    { t: "Observateur, rigoureux, appliqué", m: ["auto", "maint", "cyber"] },
+    { t: "Curieux, bidouilleur, touche-à-tout", m: ["iot", "electro"] },
+    { t: "Dynamique, sociable, orienté terrain", m: ["elec", "domo"] }
+  ]
+},
+{
+  q: "15. Quand tu parles de ton futur métier, tu veux :",
+  options: [
+    { t: "Participer à l’évolution des bâtiments intelligents", m: ["domo", "iot"] },
+    { t: "Garantir la sécurité des infrastructures", m: ["cyber", "reseau"] },
+    { t: "Assurer le bon fonctionnement de systèmes critiques", m: ["maint", "auto"] }
+  ]
+},
+{
+  q: "16. Tu préfères manipuler :",
+  options: [
+    { t: "Des logiciels, des scripts ou des configurations réseau", m: ["reseau", "cyber"] },
+    { t: "Des équipements physiques (tournevis, multimètre, testeurs…)", m: ["elec", "maint"] },
+    { t: "Des cartes Arduino, capteurs, circuits", m: ["iot", "electro"] }
+  ]
+},
+{
+  q: "17. Tu es intéressé par :",
+  options: [
+    { t: "La domotique et les équipements connectés", m: ["domo", "iot"] },
+    { t: "L’électronique et les microcontrôleurs", m: ["electro", "auto"] },
+    { t: "Les interventions techniques et la maintenance", m: ["maint", "elec"] }
+  ]
+},
+{
+  q: "18. Ton enseignant remarque que tu es :",
+  options: [
+    { t: "Minutieux et logique dans ton raisonnement", m: ["auto", "cyber"] },
+    { t: "Autonome et débrouillard avec le matériel", m: ["maint", "elec"] },
+    { t: "Créatif et curieux d’essayer de nouvelles choses", m: ["iot", "electro"] }
+  ]
+},
+{
+  q: "19. En entreprise, tu préférerais :",
+  options: [
+    { t: "Intervenir seul sur des systèmes à sécuriser ou configurer", m: ["cyber", "reseau"] },
+    { t: "Travailler avec d’autres sur chantier ou atelier", m: ["elec", "domo", "maint"] },
+    { t: "Proposer des idées pour améliorer ou automatiser un système", m: ["iot", "auto", "electro"] }
+  ]
+},
+{
+  q: "20. Dans un monde idéal, tu aimerais :",
+  options: [
+    { t: "Créer ou intégrer des objets intelligents", m: ["iot", "domo"] },
+    { t: "Résoudre des pannes complexes", m: ["maint", "auto"] },
+    { t: "Protéger les systèmes contre les intrusions", m: ["cyber", "reseau"] }
+  ]
+}
 
-      document.getElementById("titre").textContent = `CV - ${metier}`;
-      document.getElementById("profil").textContent = data.profil;
+    ];
 
-      const compList = document.getElementById("competences");
-      compList.innerHTML = "";
-      data.competences.forEach(c => {
-        const li = document.createElement("li");
-        li.contentEditable = true;
-        li.className = "editable";
-        li.textContent = c;
-        compList.appendChild(li);
+    const form = document.getElementById("qcmForm");
+    questions.forEach((q, i) => {
+      const block = document.createElement("div");
+      block.className = "question";
+      const title = document.createElement("h2");
+      title.textContent = q.q;
+      block.appendChild(title);
+      q.options.forEach((opt, j) => {
+        const label = document.createElement("label");
+        label.innerHTML = `<input type="radio" name="q${i}" value="${opt.m.join(',')}"> ${opt.t}`;
+        block.appendChild(label);
+      });
+      form.appendChild(block);
+    });
+
+    const submit = document.createElement("button");
+    submit.type = "submit";
+    submit.textContent = "Voir mes résultats";
+    form.appendChild(submit);
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const scores = {};
+      for (let key in metiers) scores[key] = 0;
+      questions.forEach((_, i) => {
+        const answer = document.querySelector(`input[name='q${i}']:checked`);
+        if (answer) {
+          answer.value.split(',').forEach(m => scores[m]++);
+        }
       });
 
-      const entrepriseTxt = document.getElementById("nomEntreprise").textContent.replace("Entreprise :", "").trim();
+      const total = Object.values(scores).reduce((a, b) => a + b, 0);
+      const resultats = Object.entries(scores)
+        .map(([key, val]) => ({ metier: metiers[key], score: Math.round((val / total) * 100) }))
+        .filter(r => r.score > 0)
+        .sort((a, b) => b.score - a.score);
 
-      const stageList = document.getElementById("stages");
-      stageList.innerHTML = "";
-      [
-        `Stage de 6 semaines chez ${entrepriseTxt || "____________"}`,
-        `Projet réalisé en classe sur le thème : ${metier}`
-      ].forEach(s => {
-        const li = document.createElement("li");
-        li.contentEditable = true;
-        li.className = "editable";
-        li.textContent = s;
-        stageList.appendChild(li);
-      });
-    }
+      const output = resultats.map(r => `${r.metier} : ${r.score} %`).join("<br>");
+      const div = document.getElementById("resultat");
+      div.innerHTML = `<h2>🔎 Résultats</h2><p>${output}</p><div style='margin-top:1.5rem; text-align:center;'><button onclick='location.reload()' style='margin:0.5rem;padding:0.5rem 1rem;background:#ccc;border:none;border-radius:4px;'>🔁 Recommencer le test</button> <a href='fiches.html' style='margin:0.5rem;padding:0.5rem 1rem;background:#004080;color:white;border:none;border-radius:4px;text-decoration:none;'>📂 Voir les fiches métiers</a></div>`;
+      div.style.display = "block";
+      form.style.display = "none";
+	  div.scrollIntoView({ behavior: 'smooth' });
 
-    function addCompetence() {
-      const li = document.createElement("li");
-      li.contentEditable = true;
-      li.className = "editable";
-      li.textContent = "Nouvelle compétence";
-      document.getElementById("competences").appendChild(li);
-    }
-
-    function addStage() {
-      const li = document.createElement("li");
-      li.contentEditable = true;
-      li.className = "editable";
-      li.textContent = "Nouvelle expérience";
-      document.getElementById("stages").appendChild(li);
-    }
-
-    function addLoisir() {
-      const li = document.createElement("li");
-      li.contentEditable = true;
-      li.className = "editable";
-      li.textContent = "Nouveau loisir";
-      document.getElementById("loisirs").appendChild(li);
-    }
-
-    function generatePDF() {
-      document.getElementById("btnAddComp").style.display = "none";
-      document.getElementById("btnAddStage").style.display = "none";
-      document.getElementById("btnAddLoisir").style.display = "none";
-
-      const element = document.getElementById("cvContent");
-      const opt = {
-        margin: 0.5,
-        filename: 'CV_Personnalise.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().set(opt).from(element).save().then(() => {
-        document.getElementById("btnAddComp").style.display = "inline-block";
-        document.getElementById("btnAddStage").style.display = "inline-block";
-        document.getElementById("btnAddLoisir").style.display = "inline-block";
-      });
-    }
-
-    window.onload = updateCV;
+    });
   </script>
 </body>
 </html>
