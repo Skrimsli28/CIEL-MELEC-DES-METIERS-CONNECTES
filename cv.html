@@ -134,6 +134,59 @@ button:hover {
   margin-top: 0.5rem;
   border-radius: 4px;
 }
+    @media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .formulaire {
+    padding: 1rem;
+  }
+
+  .cv-container {
+    flex-direction: column;
+    border-radius: 8px;
+  }
+
+  .cv-left, .cv-right {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .formulaire input, .formulaire select {
+    width: 100%;
+    max-width: none;
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .add-btn {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
+.cv-left .editable {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.cv-left .editable:focus {
+  background-color: #ffffff;
+  color: #000000;
+}
+
 
   </style>
 </head>
